@@ -31,10 +31,10 @@ public class ListActivityDirectories extends AppCompatActivity {
     // Wird spaeter gebraucht
     private String pathScreenShots =
       Environment.getExternalStoragePublicDirectory(
-        Environment.DIRECTORY_PICTURES).getAbsolutePath();
+        Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/Screenshots";
     private String pathCamera =
       Environment.getExternalStoragePublicDirectory(
-        Environment.DIRECTORY_DCIM).getAbsolutePath() + "Camera";
+        Environment.DIRECTORY_DCIM).getAbsolutePath() + "/Camera";
 
     private ListView list;
     private Button btn_auswahl;
@@ -127,7 +127,6 @@ public class ListActivityDirectories extends AppCompatActivity {
         // Bundle enthaelt die zu uebergebenden Infos ...
         Bundle infos = new Bundle();
         // ... nach put...
-        infos.putStringArray("PATH_INFOS",titles);
         infos.putString("SELECTED_DIRECTORY",selectedDirectory);
         startnext.putExtras(infos);
         // Activity starten mit Uebergabe der Infos ...

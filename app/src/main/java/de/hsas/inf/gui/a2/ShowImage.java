@@ -1,5 +1,6 @@
 package de.hsas.inf.gui.a2;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,7 @@ public class ShowImage extends AppCompatActivity {
 
   private TextView pfade;
   private ImageView image; // Von Ihnen weiter einzubinden
+  String[] filepaths;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +23,18 @@ public class ShowImage extends AppCompatActivity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     pfade = findViewById(R.id.showPath);
-    String [] pfadeStrings =
-      getIntent().getExtras().getStringArray("PATH_INFOS");
     String directory = getIntent().getExtras().getString("SELECTED_DIRECTORY");
-    pfade.setText(pfadeStrings[0] + "\n" + pfadeStrings[1] + "\n" +  directory);
+    image = findViewById(R.id.gallery);
+    //pfade.setText(pfadeStrings[0] + "\n" + pfadeStrings[1] + "\n" +  directory);
+    try {
+        filepaths = FileIO.loadImagePathNames(directory);
+        Bitmap bitmap = FileIO.createBitmapFromFile(filepaths[0]);
+        System.out.println("Path " +
+                filepaths[0]);
+        image.setImageBitmap(bitmap);
+    } catch (Exception e){
+      //pfade.setText("Kein Text vorhanden!");
+      image.setImageResource(R.drawable.x);
+    }
   }
-
 }
